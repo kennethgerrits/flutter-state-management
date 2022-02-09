@@ -4,7 +4,7 @@ import 'package:state_management/models/product.dart';
 
 class ProductBox extends StatelessWidget {
   const ProductBox({Key? key, required this.item}) : super(key: key);
-  final Product item;
+  final ValueNotifier<Product> item;
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +15,18 @@ class ProductBox extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Image.asset("assets/" + item.image),
+            Image.asset("assets/" + item.value.image),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(5),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text(item.name,
+                    Text(item.value.name,
                         style: const TextStyle(fontWeight: FontWeight.bold)),
-                    Text(item.description),
-                    Text("Price: " + item.price.toString()),
-                    RatingBox(product: item),
+                    Text(item.value.name),
+                    Text("Price: " + item.value.price.toString()),
+                    RatingBox(item: item),
                   ],
                 ),
               ),

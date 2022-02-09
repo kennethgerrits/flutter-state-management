@@ -12,37 +12,42 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final repository = ProductRepository();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: InheritedProduct(
-          child: ProductList(title: 'Product state demo home page')),
+      home: ProductList(
+        title: 'Product state demo home page',
+        items: repository.getProducts(),
+      ),
     );
   }
 }
 
-class InheritedProduct extends InheritedWidget {
-   final ProductRepository repository = ProductRepository();
-   
-  const InheritedProduct({
-    Key? key,
-    required Widget child,
-  }) : super(key: key, child: child);
-
- 
-
-  @override
-  bool updateShouldNotify(InheritedProduct oldWidget) => true;
-
-  static InheritedProduct? of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<InheritedProduct>();
-}
+// class InheritedProduct extends InheritedWidget {
+//    final ProductRepository repository = ProductRepository();
+//
+//   const InheritedProduct({
+//     Key? key,
+//     required Widget child,
+//   }) : super(key: key, child: child);
+//
+//
+//
+//   @override
+//   bool updateShouldNotify(InheritedProduct oldWidget) => true;
+//
+//   static InheritedProduct? of(BuildContext context) =>
+//       context.dependOnInheritedWidgetOfExactType<InheritedProduct>();
+// }
 
 class ProductList extends StatefulWidget {
-  ProductList({Key? key, required this.title}) : super(key: key);
+  ProductList({Key? key, required this.title, required this.items})
+      : super(key: key);
   final String title;
+  final ValueNotifier<List<ValueNotifier<Product>>> items;
 
   @override
   _ProductListState createState() => _ProductListState();
@@ -51,33 +56,58 @@ class ProductList extends StatefulWidget {
 class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
-
-    final InheritedProduct inherited = InheritedProduct.of(context); 
     return Scaffold(
-      appBar: AppBar(title: const Text("Product Navigation")),
-      body: ListView.builder(
-        itemCount:
-            InheritedProduct.of(context)!.repository.getProducts().length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            child: ProductBox(
-                item: InheritedProduct.of(context)!
-                    .repository
-                    .getProducts()[index]),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductPage(
-                      item: InheritedProduct.of(context)?
-                          .repository
-                          .getProducts()[index]),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
+        appBar: AppBar(title: const Text("Product Navigation")),
+        body: ValueListenableBuilder(
+          valueListenable: widget.items,
+          builder: (BuildContext context, value, Widget? child) {
+            return ListView.builder(
+              itemCount: widget.items.value.length,
+              itemBuilder: (context, index) {
+                return ValueListenableBuilder(
+                  valueListenable: widget.items.value[index],
+                  builder:
+                      (BuildContext context, Product value, Widget? child) {
+                    return GestureDetector(
+                      child: ProductBox(item: widget.items.value[index]),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProductPage(item: widget.items.value[index]),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            );
+          },
+        )
+        // body: ListView.builder(
+        //   itemCount: widget.items.value.length,
+        //   itemBuilder: (context, index) {
+        //     return ValueListenableBuilder(
+        //       valueListenable: widget.items.value[index],
+        //       builder: (BuildContext context, Product value, Widget? child) {
+        //         return GestureDetector(
+        //           child: ProductBox(item: widget.items.value[index]),
+        //           onTap: () {
+        //             Navigator.push(
+        //               context,
+        //               MaterialPageRoute(
+        //                 builder: (context) =>
+        //                     ProductPage(item: widget.items.value[index]),
+        //               ),
+        //             );
+        //           },
+        //         );
+        //       },
+        //     );
+        //   },
+        // ),
+        );
   }
 }

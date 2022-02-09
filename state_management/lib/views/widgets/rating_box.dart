@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:state_management/models/product.dart';
 
 class RatingBox extends StatefulWidget {
-  final Product product;
+  final ValueNotifier<Product> item;
 
-  const RatingBox({Key? key, required this.product}) : super(key: key);
+  RatingBox({Key? key, required this.item}) : super(key: key);
 
   @override
   _RatingBoxState createState() {
@@ -15,26 +15,29 @@ class RatingBox extends StatefulWidget {
 class _RatingBoxState extends State<RatingBox> {
   void _setRatingAsOne() {
     setState(() {
-      widget.product.setRating(1);
+      widget.item.value.setRating(1);
+      widget.item.notifyListeners();
     });
   }
 
   void _setRatingAsTwo() {
     setState(() {
-      widget.product.setRating(2);
+      widget.item.value.setRating(2);
+      widget.item.notifyListeners();
     });
   }
 
   void _setRatingAsThree() {
     setState(() {
-      widget.product.setRating(3);
+      widget.item.value.setRating(3);
+      widget.item.notifyListeners();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     double _size = 20;
-    print(widget.product.rating);
+    print(widget.item.value.rating);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -44,7 +47,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.product.rating >= 1
+            icon: (widget.item.value.rating >= 1
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -61,7 +64,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.product.rating >= 2
+            icon: (widget.item.value.rating >= 2
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -78,7 +81,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.product.rating >= 3
+            icon: (widget.item.value.rating >= 3
                 ? Icon(
                     Icons.star,
                     size: _size,
