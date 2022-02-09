@@ -47,7 +47,7 @@ class ProductList extends StatefulWidget {
   ProductList({Key? key, required this.title, required this.items})
       : super(key: key);
   final String title;
-  final List<ValueNotifier<Product>> items;
+  final List<Product> items;
 
   @override
   _ProductListState createState() => _ProductListState();
@@ -62,8 +62,8 @@ class _ProductListState extends State<ProductList> {
           itemCount: widget.items.length,
           itemBuilder: (context, index) {
             return ValueListenableBuilder(
-              valueListenable: widget.items[index],
-              builder: (BuildContext context, Product value, Widget? child) {
+              valueListenable: widget.items[index].rating,
+              builder: (BuildContext context, int value, Widget? child) {
                 return GestureDetector(
                   child: ProductBox(item: widget.items[index]),
                   onTap: () {

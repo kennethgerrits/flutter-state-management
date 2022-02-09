@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:state_management/models/product.dart';
 
 class RatingBox extends StatefulWidget {
-  final ValueNotifier<Product> item;
+  final Product item;
 
   RatingBox({Key? key, required this.item}) : super(key: key);
 
@@ -15,29 +15,26 @@ class RatingBox extends StatefulWidget {
 class _RatingBoxState extends State<RatingBox> {
   void _setRatingAsOne() {
     setState(() {
-      widget.item.value.setRating(1);
-      widget.item.notifyListeners();
+      widget.item.setRating(1);
     });
   }
 
   void _setRatingAsTwo() {
     setState(() {
-      widget.item.value.setRating(2);
-      widget.item.notifyListeners();
+      widget.item.setRating(2);
     });
   }
 
   void _setRatingAsThree() {
     setState(() {
-      widget.item.value.setRating(3);
-      widget.item.notifyListeners();
+      widget.item.setRating(3);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     double _size = 20;
-    print(widget.item.value.rating);
+    print(widget.item.rating.value);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -47,7 +44,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.item.value.rating >= 1
+            icon: (widget.item.rating.value >= 1
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -64,7 +61,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.item.value.rating >= 2
+            icon: (widget.item.rating.value >= 2
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -81,7 +78,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.item.value.rating >= 3
+            icon: (widget.item.rating.value >= 3
                 ? Icon(
                     Icons.star,
                     size: _size,

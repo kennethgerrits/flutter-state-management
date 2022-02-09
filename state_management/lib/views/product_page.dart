@@ -4,13 +4,13 @@ import 'package:state_management/views/widgets/rating_box.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({Key? key, required this.item}) : super(key: key);
-  final ValueNotifier<Product> item;
+  final Product item;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(item.value.name),
+        title: Text(item.name),
       ),
       body: Center(
         child: Container(
@@ -19,7 +19,7 @@ class ProductPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Image.asset("assets/" + item.value.image),
+              Image.asset("assets/" + item.image),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(5),
@@ -27,11 +27,11 @@ class ProductPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        item.value.name,
+                        item.name,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text(item.value.description),
-                      Text("Price: " + item.value.price.toString()),
+                      Text(item.description),
+                      Text("Price: " + item.price.toString()),
                       RatingBox(item: item),
                     ],
                   ),
