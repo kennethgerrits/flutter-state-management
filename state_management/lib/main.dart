@@ -47,7 +47,7 @@ class ProductList extends StatefulWidget {
   ProductList({Key? key, required this.title, required this.items})
       : super(key: key);
   final String title;
-  final ValueNotifier<List<ValueNotifier<Product>>> items;
+  final List<ValueNotifier<Product>> items;
 
   @override
   _ProductListState createState() => _ProductListState();
@@ -58,56 +58,27 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text("Product Navigation")),
-        body: ValueListenableBuilder(
-          valueListenable: widget.items,
-          builder: (BuildContext context, value, Widget? child) {
-            return ListView.builder(
-              itemCount: widget.items.value.length,
-              itemBuilder: (context, index) {
-                return ValueListenableBuilder(
-                  valueListenable: widget.items.value[index],
-                  builder:
-                      (BuildContext context, Product value, Widget? child) {
-                    return GestureDetector(
-                      child: ProductBox(item: widget.items.value[index]),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ProductPage(item: widget.items.value[index]),
-                          ),
-                        );
-                      },
+        body: ListView.builder(
+          itemCount: widget.items.length,
+          itemBuilder: (context, index) {
+            return ValueListenableBuilder(
+              valueListenable: widget.items[index],
+              builder: (BuildContext context, Product value, Widget? child) {
+                return GestureDetector(
+                  child: ProductBox(item: widget.items[index]),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ProductPage(item: widget.items[index]),
+                      ),
                     );
                   },
                 );
               },
             );
           },
-        )
-        // body: ListView.builder(
-        //   itemCount: widget.items.value.length,
-        //   itemBuilder: (context, index) {
-        //     return ValueListenableBuilder(
-        //       valueListenable: widget.items.value[index],
-        //       builder: (BuildContext context, Product value, Widget? child) {
-        //         return GestureDetector(
-        //           child: ProductBox(item: widget.items.value[index]),
-        //           onTap: () {
-        //             Navigator.push(
-        //               context,
-        //               MaterialPageRoute(
-        //                 builder: (context) =>
-        //                     ProductPage(item: widget.items.value[index]),
-        //               ),
-        //             );
-        //           },
-        //         );
-        //       },
-        //     );
-        //   },
-        // ),
-        );
+        ));
   }
 }

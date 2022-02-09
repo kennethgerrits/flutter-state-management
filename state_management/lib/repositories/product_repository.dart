@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:state_management/models/product.dart';
 
 class ProductRepository {
-  ValueNotifier<List<ValueNotifier<Product>>> items =
-      ValueNotifier(<ValueNotifier<Product>>[
+  List<ValueNotifier<Product>> items = <ValueNotifier<Product>>[
     ValueNotifier(Product(
       "Pixel",
       "Pixel is the most feature-full phone ever",
@@ -39,9 +38,9 @@ class ProductRepository {
       "yellow.jpeg",
       0,
     ))
-  ]);
+  ];
 
-  ValueNotifier<List<ValueNotifier<Product>>> getProducts() {
+  List<ValueNotifier<Product>> getProducts() {
     return items;
   }
 }
