@@ -1,8 +1,13 @@
 class Product {
-  final String name;
-  final String description;
-  final int price;
-  final String image;
+  String name;
+  String description;
+  int price;
+  String image;
+  int rating;
 
-  Product(this.name, this.description, this.price, this.image);
+  Product(this.name, this.description, this.price, this.image, this.rating);
+
+  void setRating(int ratingNew) {
+    rating = ratingNew;
+  }
 }

@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/models/product.dart';
 
 class RatingBox extends StatefulWidget {
-  const RatingBox({Key? key}) : super(key: key);
+  final Product product;
+
+  const RatingBox({Key? key, required this.product}) : super(key: key);
 
   @override
-  _RatingBoxState createState() => _RatingBoxState();
+  _RatingBoxState createState() {
+    return _RatingBoxState();
+  }
 }
 
 class _RatingBoxState extends State<RatingBox> {
-  int _rating = 0;
   void _setRatingAsOne() {
     setState(() {
-      _rating = 1;
+      widget.product.setRating(1);
     });
   }
 
   void _setRatingAsTwo() {
     setState(() {
-      _rating = 2;
+      widget.product.setRating(2);
     });
   }
 
   void _setRatingAsThree() {
     setState(() {
-      _rating = 3;
+      widget.product.setRating(3);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     double _size = 20;
-    print(_rating);
+    print(widget.product.rating);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -40,7 +44,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (_rating >= 1
+            icon: (widget.product.rating >= 1
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -57,7 +61,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (_rating >= 2
+            icon: (widget.product.rating >= 2
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -74,7 +78,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (_rating >= 3
+            icon: (widget.product.rating >= 3
                 ? Icon(
                     Icons.star,
                     size: _size,
