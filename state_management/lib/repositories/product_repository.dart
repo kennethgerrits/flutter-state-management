@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:state_management/models/product.dart';
 
 class ProductRepository {

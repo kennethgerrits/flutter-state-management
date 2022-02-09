@@ -1,18 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 class Product {
-  String name = "";
-  String description = "";
-  int price = 0;
-  String image = "";
+  String name;
+  String description;
+  int price;
+  String image;
   ValueNotifier<int> rating = ValueNotifier(0);
 
-  Product(
-      String name, String description, int price, String image, int rating) {
-    this.name = name;
-    this.description = description;
-    this.price = price;
-    this.image = image;
+  Product(this.name, this.description, this.price, this.image, int rating) {
     this.rating = ValueNotifier(rating);
   }
 

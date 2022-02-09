@@ -26,25 +26,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class InheritedProduct extends InheritedWidget {
-//    final ProductRepository repository = ProductRepository();
-//
-//   const InheritedProduct({
-//     Key? key,
-//     required Widget child,
-//   }) : super(key: key, child: child);
-//
-//
-//
-//   @override
-//   bool updateShouldNotify(InheritedProduct oldWidget) => true;
-//
-//   static InheritedProduct? of(BuildContext context) =>
-//       context.dependOnInheritedWidgetOfExactType<InheritedProduct>();
-// }
-
 class ProductList extends StatefulWidget {
-  ProductList({Key? key, required this.title, required this.items})
+  const ProductList({Key? key, required this.title, required this.items})
       : super(key: key);
   final String title;
   final List<Product> items;
