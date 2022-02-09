@@ -3,9 +3,11 @@ import 'package:state_management/repositories/product_repository.dart';
 import 'package:state_management/views/product_page.dart';
 import 'package:state_management/views/widgets/product_box.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Product Navigation")),
+        appBar: AppBar(title: const Text("Product Navigation")),
         body: ListView.builder(
           itemCount: items.length,
           itemBuilder: (context, index) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RatingBox extends StatefulWidget {
+  const RatingBox({Key? key}) : super(key: key);
+
   @override
   _RatingBoxState createState() => _RatingBoxState();
 }
@@ -25,16 +27,18 @@ class _RatingBoxState extends State<RatingBox> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     double _size = 20;
     print(_rating);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
           child: IconButton(
             icon: (_rating >= 1
                 ? Icon(
@@ -51,7 +55,7 @@ class _RatingBoxState extends State<RatingBox> {
           ),
         ),
         Container(
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
           child: IconButton(
             icon: (_rating >= 2
                 ? Icon(
@@ -68,7 +72,7 @@ class _RatingBoxState extends State<RatingBox> {
           ),
         ),
         Container(
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
           child: IconButton(
             icon: (_rating >= 3
                 ? Icon(
