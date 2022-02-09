@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:state_management/models/product.dart';
 import 'package:state_management/views/widgets/rating_box.dart';
 
-
 class ProductPage extends StatelessWidget {
   const ProductPage({Key? key, required this.item}) : super(key: key);
   final Product item;
@@ -33,7 +32,7 @@ class ProductPage extends StatelessWidget {
                       ),
                       Text(item.description),
                       Text("Price: " + item.price.toString()),
-                      RatingBox(product: item),
+                      const RatingBox(),
                     ],
                   ),
                 ),

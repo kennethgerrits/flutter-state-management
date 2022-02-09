@@ -1,40 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:state_management/models/product.dart';
+import 'package:provider/provider.dart';
+import 'package:state_management/providers/rating_provider.dart';
 
-class RatingBox extends StatefulWidget {
-  final Product product;
-
-  const RatingBox({Key? key, required this.product}) : super(key: key);
-
-  @override
-  _RatingBoxState createState() {
-    return _RatingBoxState();
-  }
-}
-
-class _RatingBoxState extends State<RatingBox> {
-  void _setRatingAsOne() {
-    setState(() {
-      widget.product.setRating(1);
-    });
-  }
-
-  void _setRatingAsTwo() {
-    setState(() {
-      widget.product.setRating(2);
-    });
-  }
-
-  void _setRatingAsThree() {
-    setState(() {
-      widget.product.setRating(3);
-    });
-  }
+class RatingBox extends StatelessWidget {
+  const RatingBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int _rating = context.watch<Rating>().rating;
     double _size = 20;
-    print(widget.product.rating);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -44,7 +18,7 @@ class _RatingBoxState extends State<RatingBox> {
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.product.rating >= 1
+            icon: (_rating >= 1
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -54,14 +28,14 @@ class _RatingBoxState extends State<RatingBox> {
                     size: _size,
                   )),
             color: Colors.red[500],
-            onPressed: _setRatingAsOne,
+            onPressed: () => context.read<Rating>().setRating(1),
             iconSize: _size,
           ),
         ),
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.product.rating >= 2
+            icon: (_rating >= 2
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -71,14 +45,14 @@ class _RatingBoxState extends State<RatingBox> {
                     size: _size,
                   )),
             color: Colors.red[500],
-            onPressed: _setRatingAsTwo,
+            onPressed: () => context.read<Rating>().setRating(2),
             iconSize: _size,
           ),
         ),
         Container(
           padding: const EdgeInsets.all(0),
           child: IconButton(
-            icon: (widget.product.rating >= 3
+            icon: (_rating >= 3
                 ? Icon(
                     Icons.star,
                     size: _size,
@@ -88,7 +62,7 @@ class _RatingBoxState extends State<RatingBox> {
                     size: _size,
                   )),
             color: Colors.red[500],
-            onPressed: _setRatingAsThree,
+            onPressed: () => context.read<Rating>().setRating(3),
             iconSize: _size,
           ),
         ),
