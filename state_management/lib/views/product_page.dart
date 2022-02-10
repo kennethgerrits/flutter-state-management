@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:state_management/models/product.dart';
+import 'package:state_management/providers/product_provider.dart';
+import 'package:state_management/views/product_form.dart';
 import 'package:state_management/views/widgets/rating_box.dart';
 
 class ProductPage extends StatelessWidget {
@@ -8,9 +11,23 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductProvider provider = context.watch<ProductProvider>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(item.name),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ProductForm(item: item),
+                ),
+              );
+            },
+            child: const Icon(Icons.create),
+          ),
+        ],
       ),
       body: Center(
         child: Container(

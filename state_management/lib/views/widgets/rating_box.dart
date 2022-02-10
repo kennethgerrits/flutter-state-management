@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/models/product.dart';
 import 'package:state_management/providers/product_provider.dart';
-import 'package:state_management/providers/rating_provider.dart';
 
 class RatingBox extends StatelessWidget {
   const RatingBox({Key? key, required this.item}) : super(key: key);

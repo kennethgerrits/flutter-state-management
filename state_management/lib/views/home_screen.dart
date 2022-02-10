@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/providers/product_provider.dart';
-import 'package:state_management/repositories/product_repository.dart';
 import 'package:state_management/views/product_page.dart';
 import 'package:state_management/views/widgets/product_box.dart';
 
@@ -10,7 +9,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = context.read<ProductProvider>().productList;
+    final items = context.watch<ProductProvider>().productList;
 
     return Scaffold(
         appBar: AppBar(title: const Text("Product Navigation")),
