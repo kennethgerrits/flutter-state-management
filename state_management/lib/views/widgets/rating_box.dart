@@ -13,21 +13,9 @@ class RatingBox extends StatefulWidget {
 }
 
 class _RatingBoxState extends State<RatingBox> {
-  void _setRatingAsOne() {
+  void _setRating(int rating) {
     setState(() {
-      widget.item.setRating(1);
-    });
-  }
-
-  void _setRatingAsTwo() {
-    setState(() {
-      widget.item.setRating(2);
-    });
-  }
-
-  void _setRatingAsThree() {
-    setState(() {
-      widget.item.setRating(3);
+      widget.item.setRating(rating);
     });
   }
 
@@ -40,58 +28,25 @@ class _RatingBoxState extends State<RatingBox> {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(0),
-          child: IconButton(
-            icon: (widget.item.rating.value >= 1
-                ? Icon(
-                    Icons.star,
-                    size: _size,
-                  )
-                : Icon(
-                    Icons.star_border,
-                    size: _size,
-                  )),
-            color: Colors.red[500],
-            onPressed: _setRatingAsOne,
-            iconSize: _size,
+      children: [
+        for (int i = 1; i <= 3; i++)
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: IconButton(
+              icon: (widget.item.rating.value >= i
+                  ? Icon(
+                      Icons.star,
+                      size: _size,
+                    )
+                  : Icon(
+                      Icons.star_border,
+                      size: _size,
+                    )),
+              color: Colors.red[500],
+              onPressed: () => _setRating(i),
+              iconSize: _size,
+            ),
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(0),
-          child: IconButton(
-            icon: (widget.item.rating.value >= 2
-                ? Icon(
-                    Icons.star,
-                    size: _size,
-                  )
-                : Icon(
-                    Icons.star_border,
-                    size: _size,
-                  )),
-            color: Colors.red[500],
-            onPressed: _setRatingAsTwo,
-            iconSize: _size,
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(0),
-          child: IconButton(
-            icon: (widget.item.rating.value >= 3
-                ? Icon(
-                    Icons.star,
-                    size: _size,
-                  )
-                : Icon(
-                    Icons.star_border,
-                    size: _size,
-                  )),
-            color: Colors.red[500],
-            onPressed: _setRatingAsThree,
-            iconSize: _size,
-          ),
-        ),
       ],
     );
   }

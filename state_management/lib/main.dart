@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:state_management/repositories/product_repository.dart';
-import 'package:state_management/views/product_page.dart';
-import 'package:state_management/views/widgets/product_box.dart';
-import 'package:state_management/models/product.dart';
+import 'package:state_management/views/product_list.dart';
 
 void main() => runApp(const MyApp());
 
@@ -23,45 +21,5 @@ class MyApp extends StatelessWidget {
         items: repository.getProducts(),
       ),
     );
-  }
-}
-
-class ProductList extends StatefulWidget {
-  const ProductList({Key? key, required this.title, required this.items})
-      : super(key: key);
-  final String title;
-  final List<Product> items;
-
-  @override
-  _ProductListState createState() => _ProductListState();
-}
-
-class _ProductListState extends State<ProductList> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text("Product Navigation")),
-        body: ListView.builder(
-          itemCount: widget.items.length,
-          itemBuilder: (context, index) {
-            return ValueListenableBuilder(
-              valueListenable: widget.items[index].rating,
-              builder: (BuildContext context, int value, Widget? child) {
-                return GestureDetector(
-                  child: ProductBox(item: widget.items[index]),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ProductPage(item: widget.items[index]),
-                      ),
-                    );
-                  },
-                );
-              },
-            );
-          },
-        ));
   }
 }
