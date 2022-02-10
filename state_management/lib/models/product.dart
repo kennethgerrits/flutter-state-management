@@ -6,8 +6,4 @@ class Product {
   int rating;
 
   Product(this.name, this.description, this.price, this.image, this.rating);
-
-  void setRating(int ratingNew) {
-    rating = ratingNew;
-  }
 }

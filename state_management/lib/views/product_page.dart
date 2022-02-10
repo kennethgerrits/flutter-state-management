@@ -32,7 +32,7 @@ class ProductPage extends StatelessWidget {
                       ),
                       Text(item.description),
                       Text("Price: " + item.price.toString()),
-                      const RatingBox(),
+                      RatingBox(item: item),
                     ],
                   ),
                 ),
