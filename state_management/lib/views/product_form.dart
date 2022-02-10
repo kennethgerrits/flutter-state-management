@@ -46,7 +46,18 @@ class ProductForm extends StatelessWidget {
                 onChanged: (text) {
                   item.price = int.parse(text);
                 },
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FloatingActionButton.extended(
+                        onPressed: () => Navigator.pop(context, false),
+                        label: const Text("Submit"))
+                  ],
+                ),
+              ),
             ],
           ),
         ));

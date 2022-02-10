@@ -6,31 +6,31 @@ class ProductRepository {
       "Pixel",
       "Pixel is the most feature-full phone ever",
       800,
-      "orange.jpg",
+      "pixel.jpg",
     ),
     Product(
       "Laptop",
       "Laptop is most productive development tool",
       2000,
-      "purple.jpg",
+      "laptop.jpg",
     ),
     Product(
       "Tablet",
       "Tablet is the most useful device ever for meeting",
       1500,
-      "green.jpg",
+      "tablet.jpg",
     ),
     Product(
       "Pendrive",
       "Pendrive is useful storage medium",
       100,
-      "blue.jpg",
+      "pendrive.jpg",
     ),
     Product(
       "Floppy Drive",
       "Floppy drive is useful rescue storage medium",
       20,
-      "yellow.jpeg",
+      "floppydrive.jpg",
     )
   ];
 
