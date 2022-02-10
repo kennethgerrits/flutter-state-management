@@ -11,7 +11,11 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(item.name),
+        title: ValueListenableBuilder(
+          valueListenable: item.version,
+          builder: (BuildContext context, int value, Widget? child) =>
+              Text(item.name),
+        ),
         actions: [
           GestureDetector(
             onTap: () {
@@ -38,8 +42,6 @@ class ProductPage extends StatelessWidget {
                   children: <Widget>[
                     Image.asset(
                       "assets/" + item.image,
-                      // height: 100,
-                      // fit: BoxFit.fitHeight,
                     ),
                     Expanded(
                       child: Container(

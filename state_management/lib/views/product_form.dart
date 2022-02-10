@@ -44,7 +44,11 @@ class ProductForm extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 onChanged: (text) {
-                  item.price = int.parse(text);
+                  if (text != "") {
+                    item.price = int.parse(text);
+                  } else {
+                    item.price = 0;
+                  }
                 },
               ),
               Padding(
