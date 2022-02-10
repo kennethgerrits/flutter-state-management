@@ -19,7 +19,7 @@ class ProductList extends StatelessWidget {
           itemCount: items.length,
           itemBuilder: (context, index) {
             return ValueListenableBuilder(
-              valueListenable: items[index].rating,
+              valueListenable: items[index].version,
               builder: (BuildContext context, int value, Widget? child) {
                 return GestureDetector(
                   child: ProductBox(item: items[index]),

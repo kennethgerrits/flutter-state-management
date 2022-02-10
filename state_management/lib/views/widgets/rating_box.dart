@@ -15,14 +15,13 @@ class RatingBox extends StatefulWidget {
 class _RatingBoxState extends State<RatingBox> {
   void _setRating(int rating) {
     setState(() {
-      widget.item.setRating(rating);
+      widget.item.rating = rating;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     double _size = 20;
-    print(widget.item.rating.value);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -33,7 +32,7 @@ class _RatingBoxState extends State<RatingBox> {
           Container(
             padding: const EdgeInsets.all(0),
             child: IconButton(
-              icon: (widget.item.rating.value >= i
+              icon: (widget.item.rating >= i
                   ? Icon(
                       Icons.star,
                       size: _size,

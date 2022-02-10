@@ -24,7 +24,7 @@ class ProductBox extends StatelessWidget {
                   children: <Widget>[
                     Text(item.name,
                         style: const TextStyle(fontWeight: FontWeight.bold)),
-                    Text(item.name),
+                    Text(item.description),
                     Text("Price: " + item.price.toString()),
                     RatingBox(item: item),
                   ],
