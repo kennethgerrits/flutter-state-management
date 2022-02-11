@@ -1,9 +1,24 @@
-class Product {
-  String name;
-  String description;
-  int price;
-  String image;
-  int rating;
+import 'package:mobx/mobx.dart';
 
-  Product(this.name, this.description, this.price, this.image, this.rating);
+part 'product.g.dart';
+
+class Product = _Product with _$Product;
+
+abstract class _Product with Store {
+  _Product(this.name, this.description, this.price, this.image, this.rating);
+
+  @observable
+  String name;
+
+  @observable
+  String description;
+
+  @observable
+  int price;
+
+  @observable
+  String image;
+
+  @observable
+  int rating;
 }

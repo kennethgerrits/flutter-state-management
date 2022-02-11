@@ -1,8 +1,9 @@
+import 'package:mobx/mobx.dart';
 import 'package:state_management/models/product.dart';
 
 class ProductRepository {
-  static List<Product> getProducts() {
-    List<Product> items = <Product>[];
+  static ObservableList<Product> getProducts() {
+    ObservableList<Product> items = ObservableList<Product>();
 
     items.add(Product(
       "Pixel",
