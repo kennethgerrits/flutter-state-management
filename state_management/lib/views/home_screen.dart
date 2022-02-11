@@ -13,27 +13,25 @@ class MyHomePage extends StatelessWidget {
     final items = Provider.of<ProductList>(context);
     items.loadProducts();
 
-    return Observer(
-      builder: (_) => Scaffold(
-        appBar: AppBar(title: const Text("Product Navigation")),
-        body: ListView.builder(
-          itemCount: items.products.length,
-          itemBuilder: (context, index) {
-            return Observer(
-              builder: (_) => GestureDetector(
-                child: ProductBox(item: items.products[index]),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductPage(item: items.products[index]),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        ),
+    return Scaffold(
+      appBar: AppBar(title: const Text("Product Navigation")),
+      body: ListView.builder(
+        itemCount: items.products.length,
+        itemBuilder: (context, index) {
+          return Observer(
+            builder: (_) => GestureDetector(
+              child: ProductBox(item: items.products[index]),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ProductPage(item: items.products[index]),
+                  ),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
