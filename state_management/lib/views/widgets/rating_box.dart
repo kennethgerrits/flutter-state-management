@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:state_management/models/product.dart';
+import 'package:get/get.dart';
 
 class RatingBox extends StatefulWidget {
   final Product item;

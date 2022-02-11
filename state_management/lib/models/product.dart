@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 class Product {
   String _name;
   String _description;
   int _price;
   String _image;
-  ValueNotifier<int> _version = ValueNotifier(0);
   int _rating = 0;
+  RxInt _version = 1.obs;
 
   Product(this._name, this._description, this._price, this._image);
 
@@ -14,23 +14,27 @@ class Product {
 
   set name(String value) {
     _name = value;
-    _setVersion();
+    setVersion();
   }
-
-  ValueNotifier<int> get version => _version;
 
   String get description => _description;
 
   set description(String value) {
     _description = value;
-    _setVersion();
+    setVersion();
   }
 
   int get rating => _rating;
 
   set rating(int value) {
     _rating = value;
-    _setVersion();
+    setVersion();
+  }
+
+  int get version => _version.value;
+
+  set version(int value) {
+    _version.value = value;
   }
 
   String get image => _image;
@@ -43,10 +47,10 @@ class Product {
 
   set price(int value) {
     _price = value;
-    _setVersion();
+    setVersion();
   }
 
-  void _setVersion() {
-    _version.value = _version.value + 1;
+  void setVersion() {
+    _version.value++;
   }
 }

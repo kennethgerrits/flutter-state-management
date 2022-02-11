@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:state_management/repositories/product_repository.dart';
 import 'package:state_management/views/product_list.dart';
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final repository = ProductRepository();
+    Get.put<ProductRepository>(ProductRepository());
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ProductList(
         title: 'Product state demo home page',
-        items: repository.getProducts(),
+        // items: repository.getProducts().obs,
       ),
     );
   }
