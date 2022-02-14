@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_management/models/product.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:state_management/models/product/product.dart';
+import 'package:state_management/models/product/product_bloc.dart';
 
 class RatingBox extends StatefulWidget {
   final Product item;
@@ -13,12 +15,6 @@ class RatingBox extends StatefulWidget {
 }
 
 class _RatingBoxState extends State<RatingBox> {
-  void _setRating(int rating) {
-    setState(() {
-      widget.item.rating = rating;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     double _size = 20;
@@ -42,7 +38,10 @@ class _RatingBoxState extends State<RatingBox> {
                       size: _size,
                     )),
               color: Colors.red[500],
-              onPressed: () => _setRating(i),
+              onPressed: () {
+                context.read<ProductBloc>().add(UpdateProductRating(
+                    product: widget.item.copyWith(rating: i)));
+              },
               iconSize: _size,
             ),
           ),

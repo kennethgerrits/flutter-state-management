@@ -1,11 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:state_management/models/product.dart';
+import 'package:state_management/models/product/product.dart';
+import 'package:state_management/models/product/product_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductForm extends StatelessWidget {
-  const ProductForm({Key? key, required this.item}) : super(key: key);
-  final Product item;
+  Product item;
+
+  ProductForm({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,14 @@ class ProductForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FloatingActionButton.extended(
-                        onPressed: () => Navigator.pop(context, false),
+                        onPressed: () {
+                          context.read<ProductBloc>().add(UpdateProduct(
+                              product: item.copyWith(
+                                  name: item.name,
+                                  description: item.description,
+                                  price: item.price)));
+                          Navigator.of(context).pop();
+                        },
                         label: const Text("Submit"))
                   ],
                 ),

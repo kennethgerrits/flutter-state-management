@@ -1,42 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:state_management/models/product.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:state_management/models/product/product.dart';
+import 'package:state_management/models/product/product_bloc.dart';
 import 'package:state_management/views/product_form.dart';
 import 'package:state_management/views/widgets/rating_box.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key, required this.item}) : super(key: key);
-  final Product item;
+  const ProductPage({Key? key, required this.oldItem}) : super(key: key);
+  final Product oldItem;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: ValueListenableBuilder(
-          valueListenable: item.version,
-          builder: (BuildContext context, int value, Widget? child) =>
-              Text(item.name),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductForm(item: item),
-                ),
-              );
-            },
-            child: const Icon(Icons.create),
+    return BlocBuilder<ProductBloc, ProductState>(
+      builder: (_, state) {
+        final Product item =
+            context.read<ProductBloc>().refreshProduct(oldItem);
+        print("Rebuild page");
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(item.name),
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(_).push(
+                    MaterialPageRoute(
+                      builder: (__) => ProductForm(item: item),
+                    ),
+                  );
+                },
+                child: const Icon(Icons.create),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Center(
-        child: Container(
-            padding: const EdgeInsets.all(0),
-            child: ValueListenableBuilder(
-              valueListenable: item.version,
-              builder: (BuildContext context, int value, Widget? child) {
-                return Column(
+          body: Center(
+            child: Container(
+                padding: const EdgeInsets.all(0),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -62,10 +61,10 @@ class ProductPage extends StatelessWidget {
                       ),
                     ),
                   ],
-                );
-              },
-            )),
-      ),
+                )),
+          ),
+        );
+      },
     );
   }
 }
