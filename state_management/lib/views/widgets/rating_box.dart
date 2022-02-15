@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:state_management/main.dart';
 import 'package:state_management/models/product.dart';
-import 'package:state_management/providers/product_provider.dart';
+import 'package:binder/binder.dart';
 
-class RatingBox extends StatelessWidget {
+class RatingBox extends StatefulWidget {
   const RatingBox({Key? key, required this.item}) : super(key: key);
   final Product item;
 
   @override
+  State<RatingBox> createState() => _RatingBoxState();
+}
+
+class _RatingBoxState extends State<RatingBox> {
+  @override
   Widget build(BuildContext context) {
-    ProductProvider provider = context.watch<ProductProvider>();
+    context.watch(productRef);
     double _size = 20;
 
     return Row(
@@ -21,7 +26,7 @@ class RatingBox extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(0),
             child: IconButton(
-              icon: (item.rating >= i
+              icon: (widget.item.rating >= i
                   ? Icon(
                       Icons.star,
                       size: _size,
@@ -32,8 +37,12 @@ class RatingBox extends StatelessWidget {
                     )),
               color: Colors.red[500],
               onPressed: () {
-                item.rating = i;
-                provider.isChanged();
+                widget.item.rating = i;
+                context
+                    .use(productViewLogicRef)
+                    .updateProduct(widget.item.copyWith(rating: i));
+
+                setState(() {});
               },
               iconSize: _size,
             ),

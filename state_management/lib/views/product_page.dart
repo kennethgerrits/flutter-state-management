@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:state_management/models/product.dart';
-import 'package:state_management/providers/product_provider.dart';
 import 'package:state_management/views/product_form.dart';
 import 'package:state_management/views/widgets/rating_box.dart';
+import 'package:binder/binder.dart';
+import 'package:state_management/main.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({Key? key, required this.item}) : super(key: key);
@@ -11,7 +11,7 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProductProvider provider = context.watch<ProductProvider>();
+    context.watch(productRef);
 
     return Scaffold(
       appBar: AppBar(

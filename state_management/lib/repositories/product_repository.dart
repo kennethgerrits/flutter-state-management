@@ -5,6 +5,7 @@ class ProductRepository {
     List<Product> items = <Product>[];
 
     items.add(Product(
+      0,
       "Pixel",
       "Pixel is the most feature-full phone ever",
       800,
@@ -12,6 +13,7 @@ class ProductRepository {
       0,
     ));
     items.add(Product(
+      1,
       "Laptop",
       "Laptop is most productive development tool",
       2000,
@@ -19,6 +21,7 @@ class ProductRepository {
       0,
     ));
     items.add(Product(
+      2,
       "Tablet",
       "Tablet is the most useful device ever for meeting",
       1500,
@@ -26,6 +29,7 @@ class ProductRepository {
       0,
     ));
     items.add(Product(
+      3,
       "Pendrive",
       "Pendrive is useful storage medium",
       100,
@@ -33,6 +37,7 @@ class ProductRepository {
       0,
     ));
     items.add(Product(
+      4,
       "Floppy Drive",
       "Floppy drive is useful rescue storage medium",
       20,

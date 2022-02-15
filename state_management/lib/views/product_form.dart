@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:state_management/main.dart';
 import 'package:state_management/models/product.dart';
-import 'package:state_management/providers/product_provider.dart';
+import 'package:binder/binder.dart';
 
 class ProductForm extends StatelessWidget {
   const ProductForm({Key? key, required this.item}) : super(key: key);
@@ -10,8 +10,6 @@ class ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductProvider provider = context.watch<ProductProvider>();
-
     return Scaffold(
       appBar: AppBar(title: const Text("Product Navigation")),
       body: Padding(
@@ -26,7 +24,6 @@ class ProductForm extends StatelessWidget {
               initialValue: item.name,
               onChanged: (text) {
                 item.name = text;
-                provider.isChanged();
               },
             ),
             TextFormField(
@@ -37,7 +34,6 @@ class ProductForm extends StatelessWidget {
               initialValue: item.description,
               onChanged: (text) {
                 item.description = text;
-                provider.isChanged();
               },
             ),
             TextFormField(
@@ -50,7 +46,6 @@ class ProductForm extends StatelessWidget {
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: (text) {
                 item.price = int.parse(text);
-                provider.isChanged();
               },
             ),
             Padding(
@@ -59,7 +54,10 @@ class ProductForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton.extended(
-                    onPressed: () => Navigator.pop(context, false),
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                      context.use(productViewLogicRef).updateProduct(item);
+                    },
                     label: const Text("Submit"),
                   ),
                 ],
