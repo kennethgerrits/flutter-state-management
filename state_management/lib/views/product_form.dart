@@ -6,11 +6,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductForm extends StatelessWidget {
   Product item;
+  String name = "";
+  String description = "";
+  int price = 0;
 
   ProductForm({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    name = item.name;
+    description = item.description;
+    price = item.price;
+
     return Scaffold(
         appBar: AppBar(title: const Text("Product Navigation")),
         body: Padding(
@@ -24,7 +31,7 @@ class ProductForm extends StatelessWidget {
                 ),
                 initialValue: item.name,
                 onChanged: (text) {
-                  item.name = text;
+                  name = text;
                 },
               ),
               TextFormField(
@@ -34,7 +41,7 @@ class ProductForm extends StatelessWidget {
                 ),
                 initialValue: item.description,
                 onChanged: (text) {
-                  item.description = text;
+                  description = text;
                 },
               ),
               TextFormField(
@@ -47,9 +54,9 @@ class ProductForm extends StatelessWidget {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 onChanged: (text) {
                   if (text != "") {
-                    item.price = int.parse(text);
+                    price = int.parse(text);
                   } else {
-                    item.price = 0;
+                    price = 0;
                   }
                 },
               ),
@@ -62,9 +69,9 @@ class ProductForm extends StatelessWidget {
                         onPressed: () {
                           context.read<ProductBloc>().add(UpdateProduct(
                               product: item.copyWith(
-                                  name: item.name,
-                                  description: item.description,
-                                  price: item.price)));
+                                  name: name,
+                                  description: description,
+                                  price: price)));
                           Navigator.of(context).pop();
                         },
                         label: const Text("Submit"))

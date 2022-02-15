@@ -42,7 +42,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       List<Product> products = (state.products.map((product) {
         return product.id == event.product.id ? event.product : product;
       })).toList();
-      emit(const ProductSwitching());
+      // emit(const ProductSwitching());
       emit(ProductLoaded(products: products));
     }
   }
