@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:state_management/main.dart';
 import 'package:state_management/models/product.dart';
 
 class ProductForm extends StatelessWidget {
@@ -57,7 +58,10 @@ class ProductForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FloatingActionButton.extended(
-                        onPressed: () => Navigator.pop(context, false),
+                        onPressed: () {
+                          productsViewModel.updateProducts(item);
+                          Navigator.pop(context, false);
+                        },
                         label: const Text("Submit"))
                   ],
                 ),

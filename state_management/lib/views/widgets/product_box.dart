@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:state_management/views/widgets/rating_box.dart';
 import 'package:state_management/models/product.dart';
+import 'package:states_rebuilder/states_rebuilder.dart';
 
-class ProductBox extends StatelessWidget {
+class ProductBox extends ReactiveStatelessWidget {
   const ProductBox({Key? key, required this.item}) : super(key: key);
   final Product item;
 

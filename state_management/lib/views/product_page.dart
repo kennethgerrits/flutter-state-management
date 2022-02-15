@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/main.dart';
 import 'package:state_management/models/product.dart';
 import 'package:state_management/views/product_form.dart';
 import 'package:state_management/views/widgets/rating_box.dart';
+import 'package:states_rebuilder/states_rebuilder.dart';
 
-class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key, required this.item}) : super(key: key);
-  final Product item;
+class ProductPage extends ReactiveStatelessWidget {
+  ProductPage({Key? key, required this.item}) : super(key: key);
+  Product item;
 
   @override
   Widget build(BuildContext context) {
+    item = productsViewModel.getProduct(item);
     return Scaffold(
       appBar: AppBar(
-        title: ValueListenableBuilder(
-          valueListenable: item.version,
-          builder: (BuildContext context, int value, Widget? child) =>
-              Text(item.name),
-        ),
+        title: Text(item.name),
         actions: [
           GestureDetector(
             onTap: () {
@@ -31,41 +30,34 @@ class ProductPage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Container(
-            padding: const EdgeInsets.all(0),
-            child: ValueListenableBuilder(
-              valueListenable: item.version,
-              builder: (BuildContext context, int value, Widget? child) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Image.asset(
-                      "assets/" + item.image,
-                    ),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text(
-                              item.name,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(item.description),
-                            Text("Price: " + item.price.toString()),
-                            RatingBox(item: item),
-                          ],
-                        ),
+          child: Container(
+              padding: const EdgeInsets.all(0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Image.asset(
+                    "assets/" + item.image,
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(
+                            item.name,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(item.description),
+                          Text("Price: " + item.price.toString()),
+                          RatingBox(item: item),
+                        ],
                       ),
                     ),
-                  ],
-                );
-              },
-            )),
-      ),
+                  ),
+                ],
+              ))),
     );
   }
 }

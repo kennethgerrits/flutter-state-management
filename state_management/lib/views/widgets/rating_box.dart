@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/main.dart';
 import 'package:state_management/models/product.dart';
 
 class RatingBox extends StatefulWidget {
@@ -13,12 +14,6 @@ class RatingBox extends StatefulWidget {
 }
 
 class _RatingBoxState extends State<RatingBox> {
-  void _setRating(int rating) {
-    setState(() {
-      widget.item.rating = rating;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     double _size = 20;
@@ -42,7 +37,10 @@ class _RatingBoxState extends State<RatingBox> {
                       size: _size,
                     )),
               color: Colors.red[500],
-              onPressed: () => _setRating(i),
+              onPressed: () {
+                widget.item.rating = i;
+                productsViewModel.updateProducts(widget.item);
+              },
               iconSize: _size,
             ),
           ),
