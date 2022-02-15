@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:state_management/models/product.dart';
+import 'package:state_management/states/app/app_model.dart';
+import 'package:state_management/states/app/app_state.dart';
 
 class ProductForm extends StatelessWidget {
   const ProductForm({Key? key, required this.item}) : super(key: key);
@@ -56,9 +59,15 @@ class ProductForm extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    FloatingActionButton.extended(
-                        onPressed: () => Navigator.pop(context, false),
-                        label: const Text("Submit"))
+                    StoreConnector<AppState, AppModel>(
+                        converter: (store) => AppModel.create(store),
+                        builder: (context, appModel) =>
+                            FloatingActionButton.extended(
+                                onPressed: () {
+                                  appModel.onUpdateProduct(item);
+                                  Navigator.of(context).pop();
+                                },
+                                label: const Text("Submit")))
                   ],
                 ),
               ),
