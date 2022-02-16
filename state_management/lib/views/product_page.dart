@@ -6,13 +6,11 @@ import 'package:binder/binder.dart';
 import 'package:state_management/main.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key, required this.item}) : super(key: key);
-  final Product item;
+  ProductPage({Key? key, required this.item}) : super(key: key);
+  Product item;
 
   @override
   Widget build(BuildContext context) {
-    context.watch(productRef);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(item.name),

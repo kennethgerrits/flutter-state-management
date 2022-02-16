@@ -8,10 +8,18 @@ class ProductViewLogic with Logic {
   final Scope scope;
 
   void updateProduct(Product product) {
-    List<Product> list = read(productRef);
-    list.map((p) => p.id == product.id ? product : p);
-
-    write(productRef, list.toList());
+    update<Iterable<Product>>(productRef,
+        (list) => list.map((p) => p.id == product.id ? product : p).toList());
   }
 
+  Product editProduct(Product product) {
+    List<Product> list = read(productRef);
+    for (int i = 0; i < list.length; i++) {
+      if (list[i].id == product.id) {
+        return list[i];
+      }
+    }
+
+    return product;
+  }
 }
