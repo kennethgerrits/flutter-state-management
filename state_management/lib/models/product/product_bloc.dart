@@ -11,7 +11,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc() : super(ProductLoading()) {
     on<LoadProduct>(_onLoadProduct);
     on<UpdateProduct>(_onUpdateProduct);
-    on<UpdateProductRating>(_onUpdateProductRating);
   }
 
   void _onLoadProduct(LoadProduct event, Emitter<ProductState> emit) {
@@ -19,19 +18,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(
       ProductLoaded(products: event.products),
     );
-  }
-
-  void _onUpdateProductRating(
-      UpdateProductRating event, Emitter<ProductState> emit) {
-    final state = this.state;
-
-    if (state is ProductLoaded) {
-      print('updateRating');
-      List<Product> products = (state.products.map((product) {
-        return product.id == event.product.id ? event.product : product;
-      })).toList();
-      emit(ProductLoaded(products: List.of(products)));
-    }
   }
 
   void _onUpdateProduct(UpdateProduct event, Emitter<ProductState> emit) {

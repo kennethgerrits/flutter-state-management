@@ -39,8 +39,8 @@ class _RatingBoxState extends State<RatingBox> {
                     )),
               color: Colors.red[500],
               onPressed: () {
-                context.read<ProductBloc>().add(UpdateProductRating(
-                    product: widget.item.copyWith(rating: i)));
+                context.read<ProductBloc>().add(
+                    UpdateProduct(product: widget.item.copyWith(rating: i)));
               },
               iconSize: _size,
             ),
