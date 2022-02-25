@@ -36,10 +36,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     final state = this.state;
 
     if (state is ProductLoaded) {
-      // var result = state.products.map((e) {
-      //   return e.id == product.id;
-      // });
-
       Product result;
       for (var i = 0; i < state.products.length; i++) {
         if (state.products[i].id == product.id) {
